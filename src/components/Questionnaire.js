@@ -7,6 +7,34 @@ import AnimatedBox from '../animations/AnimatedBox';
 class Questionnaire extends Component {
   constructor (props) {
     super (props);
+
+    this.state = {
+      questionAnswered: false,
+      currentQuestionId: 1,
+    };
+  }
+
+  componentWillReceiveProps (newProps) {
+    console.log ('new-props', newProps);
+    newProps.assesment.questions.forEach (question => {
+      if (question.active) {
+        this.setState ({
+          currentQuestionId: question.id,
+        });
+      }
+    });
+  }
+
+  updateAssesmentScore (answer) {
+    this.setState ({
+      questionAnswered: true,
+    });
+    setTimeout (() => {
+      this.props.updateAssesmentScore (this.props.assesment.id, answer);
+      this.setState ({
+        questionAnswered: false,
+      });
+    }, 500);
   }
 
   render () {
@@ -17,16 +45,13 @@ class Questionnaire extends Component {
             <QuestionHeader assesment={this.props.assesment} />
             <div className="white-box-content">
               <Questions
+                currentQuestionId={this.state.currentQuestionId}
                 questions={this.props.assesment.questions}
-                questionAnswered={this.props.questionAnswered}
+                questionAnswered={this.state.questionAnswered}
               />
               <Answers
                 answers={this.props.assesment.answers}
-                selectAnswer={answer =>
-                  this.props.updateAssesmentScore (
-                    this.props.assesment.id,
-                    answer
-                  )}
+                selectAnswer={answer => this.updateAssesmentScore (answer)}
               />
             </div>
           </div>

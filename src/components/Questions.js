@@ -1,23 +1,36 @@
 import React, {Component} from 'react';
 import Question from './Question';
+import AnimatedBox from '../animations/AnimatedBox';
 
 class Questions extends Component {
   constructor (props) {
     super (props);
-    console.log ('old-props');
   }
 
   render () {
     return (
       <div>
-        <h3 className="question-counter">Question 1</h3>
+        <h3 className="question-counter">
+          Question
+          {' '}
+          {this.props.currentQuestionId}
+          {' '}
+          of
+          {' '}
+          {this.props.questions.length}
+        </h3>
         {this.props.questions.map (question => {
           return (
-            <Question
-              question={question}
+            <AnimatedBox
               key={question.id}
-              className="question"
-            />
+              pose={this.props.questionAnswered ? 'exit' : 'enter'}
+            >
+              <Question
+                question={question}
+                key={question.id}
+                className="question"
+              />
+            </AnimatedBox>
           );
         })}
       </div>

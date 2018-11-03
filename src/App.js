@@ -121,7 +121,7 @@ class App extends Component {
       this.setState ({
         showingQuestionScreen: false,
       });
-      if(this.state.currentAssesmentId === this.state.assesments.length) {
+      if (this.state.currentAssesmentId === this.state.assesments.length) {
         setTimeout (() => {
           this.setState ({
             showingResults: true,
@@ -184,7 +184,6 @@ class App extends Component {
             return (
               <Questionnaire
                 showingQuestionScreen={this.state.showingQuestionScreen}
-                questionAnswered={this.state.questionAnswered}
                 key={assesment.id}
                 assesment={assesment}
                 updateAssesmentScore={this.updateAssesmentScore}
