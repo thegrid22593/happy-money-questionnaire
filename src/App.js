@@ -10,26 +10,36 @@ import './App.scss';
 class App extends Component {
   constructor (props) {
     super (props);
+
     this.updateAssesmentScore = this.updateAssesmentScore.bind (this);
     this.updateUserName = this.updateUserName.bind (this);
     this.startAssesment = this.startAssesment.bind (this);
+
     this.state = fixture;
-    console.log (this.state);
   }
 
+  /**
+ * This componentDidMount function is the base for starting the inital
+ * animation of the app, with an animated box from the bottom of the
+ * screen.
+ *
+  @return void
+ */
   componentDidMount () {
     setTimeout (() => {
-      this.setState ({
-        showingStartScreen: true,
-      });
+      this.setState ({showingStartScreen: true});
     }, 500);
   }
 
+  /**
+ * Updates the assesment score on the state, checks some other.
+ *
+ * @param {number} assesmentId The assesment id that the score should be 
+ * updated on.
+ * @param {object} This The answer that user selected and will be used to 
+ * calcualte what point value should be added to the score.
+ */
   updateAssesmentScore (assesmentId, answer) {
-    console.log (
-      'current-question-reverse: ',
-      this.isCurrentQuestionReverse ()
-    );
     let assesmentScores = this.state.assesmentScores.map (assesmentScore => {
       if (assesmentScore.id === assesmentId) {
         if (!this.isCurrentQuestionReverse ()) {
@@ -48,15 +58,25 @@ class App extends Component {
     this.nextQuestion ();
   }
 
+  /**
+ * Updates the state with the name.
+ *
+ * @param {string} name the name that will be used to update with.
+ * @return void
+ */
   updateUserName (name) {
     this.setState ({name});
   }
 
+  /**
+ * Transitions the app into the start of an assesment. Assesment is calculated
+ * based on the currentAssesmentId and increments from there.
+ *
+ * @return void
+ */
   startAssesment () {
     setTimeout (() => {
-      this.setState ({
-        showingStartScreen: false,
-      });
+      this.setState ({showingStartScreen: false});
       let assesments = this.state.assesments.map (assesment => {
         if (assesment.id === this.state.currentAssesmentId + 1) {
           assesment.active = true;
@@ -69,12 +89,16 @@ class App extends Component {
         assesments,
         currentAssesmentId: this.state.currentAssesmentId + 1,
       });
-      this.setState ({
-        showingQuestionScreen: true,
-      });
+      this.setState ({showingQuestionScreen: true});
     }, 500);
   }
 
+  /**
+ * Checks if the current question has a reverse value which should then
+ * make the score decrement
+ *
+ * @return boolean
+ */
   isCurrentQuestionReverse () {
     const activeAssesment = this.getActiveAssesment ();
     const activeQuestion = this.getActiveQuestion (activeAssesment.questions);
@@ -84,14 +108,25 @@ class App extends Component {
     return false;
   }
 
+  /**
+ * Gets the active assesment
+ *
+ * @return {object} assesment
+ */
   getActiveAssesment () {
     return this.state.assesments.find (assesment => {
       if (assesment.active) {
         return assesment;
       }
+      return false;
     });
   }
 
+  /**
+   * Gets the active question
+   *
+   * @return {object} question
+ */
   getActiveQuestion (questions) {
     return questions.find (question => {
       if (question.active) {
@@ -101,42 +136,44 @@ class App extends Component {
     });
   }
 
+  /**
+   * Transitions the assesment to the next question, updating state along the way
+   * with various ui transitions.
+   *
+   * @return void
+ */
   nextQuestion () {
     const activeAssesment = this.getActiveAssesment ();
-    console.log ('is-last-question:', this.isLastQuestion (activeAssesment));
     if (!this.isLastQuestion (activeAssesment)) {
       const questions = this.incrementActiveQuestion (activeAssesment);
       activeAssesment.questions = questions;
-      console.log ('questions', questions);
       let updatedAssessments = this.state.assesments.map (assesment => {
-        if (assesment.id == activeAssesment) {
+        if (assesment.id === activeAssesment) {
           assesment.questions = questions;
         }
         return assesment;
       });
-      this.setState ({
-        assesments: updatedAssessments,
-      });
+      this.setState ({assesments: updatedAssessments});
     } else {
-      this.setState ({
-        showingQuestionScreen: false,
-      });
+      this.setState ({showingQuestionScreen: false});
       if (this.state.currentAssesmentId === this.state.assesments.length) {
         setTimeout (() => {
-          this.setState ({
-            showingResults: true,
-          });
+          this.setState ({showingResults: true});
         }, 500);
       } else {
         setTimeout (() => {
-          this.setState ({
-            showHalfwayDisplay: true,
-          });
+          this.setState ({showHalfwayDisplay: true});
         }, 500);
       }
     }
   }
 
+  /**
+   * Changes the active question by one index in the current array of questions 
+   * on the active assesment
+   *
+   * @return {array} questions
+ */
   incrementActiveQuestion (assesment) {
     let nextQuestionIndex = null;
     const questions = assesment.questions.map ((question, index) => {
@@ -155,6 +192,12 @@ class App extends Component {
     return questions;
   }
 
+  /**
+   * Checks to see if the current question is the last question in
+   * the active assesment
+   *
+   * @return {boolean}
+ */
   isLastQuestion (assesment) {
     let activeQuestion = this.getActiveQuestion (assesment.questions);
     if (activeQuestion.id === assesment.questions.length) {
@@ -163,10 +206,14 @@ class App extends Component {
     return false;
   }
 
+  /**
+   * Transitions the app to the next assesment if the 
+   * app is not on the final assesment
+   *
+   * @return void
+ */
   continueAssesment () {
-    this.setState ({
-      showHalfwayDisplay: false,
-    });
+    this.setState ({showHalfwayDisplay: false});
     this.startAssesment ();
   }
 
