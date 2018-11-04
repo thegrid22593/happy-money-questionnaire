@@ -237,6 +237,7 @@ class App extends Component {
               />
             );
           }
+          return false;
         })}
         <ResultsDisplay
           userName={this.state.userName}
