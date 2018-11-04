@@ -1,0 +1,38 @@
+.white-box-content {
+	.answers-list {
+		border-top: 2px solid $color-light-grey;
+		margin: 0;
+		padding: 0;
+		padding-top: 1rem;
+		.answer {
+			background: $color-secondary;
+			margin: 1rem 0;
+			padding: 1rem 0;
+			color: $color-white;
+			font-size: 0.8rem;
+			border-radius: 10px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			font-weight: 600;
+			cursor: pointer;
+			max-width: 300px;
+			margin: 1rem auto;
+			@include transition(0.1s all ease-in-out);
+			@include mq-md {
+				padding: 0.75rem 0;
+				font-size: 0.75rem;
+				margin: 0.75rem auto;
+			}
+			@include mq-sm {
+				font-size: 0.5rem;
+				margin: 0.5rem auto;
+			}
+			&:hover {
+				background: darken($color-secondary, 5%);
+			}
+			&:active {
+				background: darken($color-secondary, 10%);
+			}
+		}
+	}
+}

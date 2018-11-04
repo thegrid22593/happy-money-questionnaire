@@ -1,0 +1,27 @@
+.white-box {
+	.question-header {
+		padding: 0.5rem 2rem;
+		border-bottom: 2px solid $color-light-grey;
+		border-radius: 10px 10px 0 0;
+		@include clearfix();
+		h6 {
+			font-size: 1.125rem;
+			color: $color-secondary;
+			width: 50%;
+			float: left;
+			margin: 0;
+			@include mq-md {
+				font-size: 1rem;
+			}
+			@include mq-sm {
+				font-size: 0.8rem;
+			}
+		}
+		h6.assesment-name {
+			text-align: left;
+		}
+		h6.assesment-number {
+			text-align: right;
+		}
+	}
+}

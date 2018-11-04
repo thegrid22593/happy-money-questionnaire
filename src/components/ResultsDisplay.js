@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import AnimatedBox from '../animations/AnimatedBox';
-import AnimatedButton from '../animations/AnimatedButton';
 
 class ResultsDisplay extends Component {
   constructor (props) {

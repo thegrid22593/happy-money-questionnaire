@@ -3,21 +3,11 @@ import Question from './Question';
 import AnimatedQuestion from '../animations/AnimatedQuestion';
 
 class Questions extends Component {
-  constructor (props) {
-    super (props);
-  }
-
   render () {
     return (
       <div>
         <h3 className="question-counter">
-          Question
-          {' '}
-          {this.props.currentQuestionId}
-          {' '}
-          of
-          {' '}
-          {this.props.questions.length}
+          {`Question ${this.props.currentQuestionId} of ${this.props.questions.length}`}
         </h3>
         {this.props.questions.map (question => {
           return (

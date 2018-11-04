@@ -1,0 +1,21 @@
+.results {
+	@include clearfix;
+	margin: 3rem 0;
+	.assesment-score {
+		width: 50%;
+		float: left;
+		img {
+			max-width: 50px;
+		}
+		h3 {
+			color: $color-secondary;
+		}
+		.score {
+			font-family: 'Pacifico', cursive;
+			font-size: 2rem;
+			line-height: 0.5;
+			margin-bottom: 1rem;
+			color: $color-grey;
+		}
+	}
+}

@@ -1,0 +1,21 @@
+.white-box-content {
+	h3.question-counter {
+		color: $color-primary;
+		@include mq-md {
+			font-size: 0.9rem;
+		}
+		@include mq-sm {
+			font-size: 0.75rem;
+		}
+	}
+	p.question {
+		font-size: 2rem;
+		font-family: 'Pacifico', cursive;
+		@include mq-md {
+			font-size: 1.5rem;
+		}
+		@include mq-sm {
+			font-size: 1rem;
+		}
+	}
+}
