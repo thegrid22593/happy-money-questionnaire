@@ -5,7 +5,7 @@ import AnimatedButton from '../animations/AnimatedButton';
 class HalfwayDisplay extends Component {
   constructor (props) {
     super (props);
-    this.continueAssesment = this.continueAssesment.bind(this);
+    this.continueAssesment = this.continueAssesment.bind (this);
     this.state = {
       showing: false,
     };
@@ -21,13 +21,13 @@ class HalfwayDisplay extends Component {
     }
   }
 
-  continueAssesment() {
-      this.setState({
-          showing: false,
-      })
-      setTimeout(() => {
-          this.props.continueAssesment();
-      }, 100)
+  continueAssesment () {
+    this.setState ({
+      showing: false,
+    });
+    setTimeout (() => {
+      this.props.continueAssesment ();
+    }, 100);
   }
 
   render () {
@@ -38,14 +38,16 @@ class HalfwayDisplay extends Component {
             <div className="white-box">
               <div className="white-box-content">
                 <h1 className="start-title">
-                  Congrats!
+                  Wow! {this.props.userName} Those Answers Rocked!
                 </h1>
-                <p>
-                  You've finished the first half of the assesment! Way to go!
-                </p>
-                <p>
-                  When you're ready let move on to optimism!
-                </p>
+                <div className="intro-text">
+                  <p>
+                    You've finished the first half of the assesment! Way to go!
+                  </p>
+                  <p>
+                    When you're ready let's move on to optimism!
+                  </p>
+                </div>
                 <AnimatedButton
                   pose={this.state.beginClicked ? 'hidden' : 'visible'}
                   onClick={this.continueAssesment}

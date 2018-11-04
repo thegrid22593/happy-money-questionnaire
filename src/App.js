@@ -172,7 +172,7 @@ class App extends Component {
 
   render () {
     return (
-      <main className="main-container">
+      <main>
         <StartScreen
           updateUserName={this.updateUserName}
           userName={this.state.name}
@@ -192,11 +192,13 @@ class App extends Component {
           }
         })}
         <ResultsDisplay
+          userName={this.state.userName}
           assesmentScores={this.state.assesmentScores}
           showingResults={this.state.showingResults}
           continueAssesment={() => this.continueAssesment ()}
         />
         <HalfwayDisplay
+          userName={this.state.name}
           showHalfwayDisplay={this.state.showHalfwayDisplay}
           continueAssesment={() => this.continueAssesment ()}
         />

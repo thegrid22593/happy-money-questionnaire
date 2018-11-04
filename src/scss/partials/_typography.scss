@@ -11,6 +11,9 @@ h6 {
 p {
 	color: $color-grey;
 	font-family: 'Open Sans', sans-serif;
+	@include mq-sm {
+		font-size: 0.75rem;
+	}
 }
 
 ul,

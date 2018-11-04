@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Question from './Question';
-import AnimatedBox from '../animations/AnimatedBox';
+import AnimatedQuestion from '../animations/AnimatedQuestion';
 
 class Questions extends Component {
   constructor (props) {
@@ -21,7 +21,7 @@ class Questions extends Component {
         </h3>
         {this.props.questions.map (question => {
           return (
-            <AnimatedBox
+            <AnimatedQuestion
               key={question.id}
               pose={this.props.questionAnswered ? 'exit' : 'enter'}
             >
@@ -30,7 +30,7 @@ class Questions extends Component {
                 key={question.id}
                 className="question"
               />
-            </AnimatedBox>
+            </AnimatedQuestion>
           );
         })}
       </div>
