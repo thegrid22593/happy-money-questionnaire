@@ -20,8 +20,8 @@ class Answers extends Component {
   }
 }
 
-Answer.propTypes = {
-  answer: PropTypes.obj,
+Answers.propTypes = {
+  answers: PropTypes.array,
   selectAnswer: PropTypes.func,
 };
 

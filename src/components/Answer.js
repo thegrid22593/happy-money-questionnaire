@@ -31,7 +31,6 @@ class Answer extends Component {
 }
 
 Answer.propTypes = {
-  answer: PropTypes.obj,
   selectAnswer: PropTypes.func,
 };
 
