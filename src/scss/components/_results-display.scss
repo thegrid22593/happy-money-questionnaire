@@ -6,6 +6,9 @@
 		float: left;
 		img {
 			max-width: 50px;
+			@include mq-sm {
+				max-width: 40px;
+			}
 		}
 		h3 {
 			color: $color-secondary;
