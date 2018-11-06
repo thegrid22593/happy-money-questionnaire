@@ -9,8 +9,9 @@
 		}
 	}
 	p.question {
-		font-size: 2rem;
-		font-family: 'Pacifico', cursive;
+		font-size: 1.75rem;
+		font-family: 'PT Serif', serif;
+		font-weight: 900;
 		@include mq-md {
 			font-size: 1.5rem;
 		}

@@ -1,5 +1,6 @@
 var fixture = {
   name: '',
+  reset: false,
   currentAssesmentId: 0,
   showingResults: false,
   showHalfwayDisplay: false,

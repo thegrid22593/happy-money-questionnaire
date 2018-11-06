@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
-import Question from './Question';
 
 class QuestionHeader extends Component {
-  constructor (props) {
-    super (props);
-  }
-
   render () {
     return (
       <div className="question-header">

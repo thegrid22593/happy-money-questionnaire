@@ -24,6 +24,14 @@ class StartScreen extends Component {
     };
   }
 
+  componentWillReceiveProps (newProps) {
+    if (newProps.reset) {
+      this.setState ({
+        beginClicked: false,
+      });
+    }
+  }
+
   handleInputChange (e) {
     this.props.updateUserName (e.target.value);
   }

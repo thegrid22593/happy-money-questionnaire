@@ -12,6 +12,7 @@ class App extends Component {
     super (props);
 
     this.updateAssesmentScore = this.updateAssesmentScore.bind (this);
+    this.resetAssesment = this.resetAssesment.bind (this);
     this.updateUserName = this.updateUserName.bind (this);
     this.startAssesment = this.startAssesment.bind (this);
 
@@ -76,7 +77,7 @@ class App extends Component {
  */
   startAssesment () {
     setTimeout (() => {
-      this.setState ({showingStartScreen: false});
+      this.setState ({showingStartScreen: false, reset: false});
       let assesments = this.state.assesments.map (assesment => {
         if (assesment.id === this.state.currentAssesmentId + 1) {
           assesment.active = true;
@@ -145,7 +146,7 @@ class App extends Component {
   nextQuestion () {
     const activeAssesment = this.getActiveAssesment ();
     if (!this.isLastQuestion (activeAssesment)) {
-      const questions = this.incrementActiveQuestion (activeAssesment);
+      const questions = this.incrementActiveQuestion (activeAssesment, false);
       activeAssesment.questions = questions;
       let updatedAssessments = this.state.assesments.map (assesment => {
         if (assesment.id === activeAssesment) {
@@ -156,6 +157,7 @@ class App extends Component {
       this.setState ({assesments: updatedAssessments});
     } else {
       this.setState ({showingQuestionScreen: false});
+      this.incrementActiveQuestion (activeAssesment, true);
       if (this.state.currentAssesmentId === this.state.assesments.length) {
         setTimeout (() => {
           this.setState ({showingResults: true});
@@ -174,17 +176,26 @@ class App extends Component {
    *
    * @return {array} questions
  */
-  incrementActiveQuestion (assesment) {
+  incrementActiveQuestion (assesment, last) {
     let nextQuestionIndex = null;
     const questions = assesment.questions.map ((question, index) => {
-      if (question.active) {
-        question.active = false;
-        question.answered = true;
-        nextQuestionIndex = index + 1;
-      }
-
-      if (index === nextQuestionIndex) {
-        question.active = true;
+      if (last) {
+        if (index === 0) {
+          question.active = true;
+          question.answered = false;
+        } else {
+          question.active = false;
+          question.answered = false;
+        }
+      } else {
+        if (question.active) {
+          question.active = false;
+          question.answered = true;
+          nextQuestionIndex = index + 1;
+        }
+        if (index === nextQuestionIndex) {
+          question.active = true;
+        }
       }
 
       return question;
@@ -217,10 +228,30 @@ class App extends Component {
     this.startAssesment ();
   }
 
+  /**
+   * Resets the app to the beginning
+   *
+   * @return void
+ */
+  resetAssesment () {
+    this.setState ({showingResults: false});
+    const assesmentScores = this.state.assesmentScores.map (assesmentScore => {
+      assesmentScore.score = 0;
+      return assesmentScore;
+    });
+    this.setState ({
+      reset: true,
+      assesmentScores,
+      currentAssesmentId: 0,
+    });
+    this.startAssesment ();
+  }
+
   render () {
     return (
       <main>
         <StartScreen
+          reset={this.state.reset}
           updateUserName={this.updateUserName}
           userName={this.state.name}
           showingStartScreen={this.state.showingStartScreen}
@@ -240,12 +271,14 @@ class App extends Component {
           return false;
         })}
         <ResultsDisplay
+          reset={this.state.reset}
           userName={this.state.userName}
           assesmentScores={this.state.assesmentScores}
           showingResults={this.state.showingResults}
-          continueAssesment={() => this.continueAssesment ()}
+          resetAssesment={() => this.resetAssesment ()}
         />
         <HalfwayDisplay
+          reset={this.state.reset}
           userName={this.state.name}
           showHalfwayDisplay={this.state.showHalfwayDisplay}
           continueAssesment={() => this.continueAssesment ()}

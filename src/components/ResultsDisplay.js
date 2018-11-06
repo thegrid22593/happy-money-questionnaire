@@ -1,22 +1,54 @@
 import React, {Component} from 'react';
 import AnimatedBox from '../animations/AnimatedBox';
+import AnimatedIconLeft from '../animations/AnimatedIconLeft';
+import AnimatedIconRight from '../animations/AnimatedIconRight';
+import AnimatedButton from '../animations/AnimatedButton';
 
 class ResultsDisplay extends Component {
   constructor (props) {
     super (props);
+    this.resetAssesment = this.resetAssesment.bind (this);
     this.state = {
       showing: false,
+      showIcons: false,
+      beginClicked: false,
     };
   }
 
   componentWillReceiveProps (newProps) {
-    if (this.props.showingResults !== newProps.showingResults) {
+    if (newProps.reset) {
+      this.setState ({
+        beginClicked: false,
+      });
+    }
+
+    if (newProps.showingResults) {
       setTimeout (() => {
         this.setState ({
           showing: true,
         });
+        setTimeout (() => {
+          this.setState ({
+            showIcons: true,
+          });
+        }, 500);
       }, 100);
+    } else {
+      this.setState ({
+        showing: false,
+        showIcons: false,
+      });
     }
+  }
+
+  resetAssesment () {
+    this.setState ({
+      beginClicked: true,
+      showing: false,
+    });
+    setTimeout (() => {
+      this.props.resetAssesment ();
+    }, 300);
   }
 
   render () {
@@ -35,25 +67,54 @@ class ResultsDisplay extends Component {
                 <p>See your scores below!</p>
                 <div className="results">
                   {this.props.assesmentScores.map (assesmentScore => {
-                    return (
-                      <div className="assesment-score" key={assesmentScore.id}>
-                        <img
-                          src={assesmentScore.icon}
-                          alt={assesmentScore.name}
-                        />
-                        <h3>{assesmentScore.name}</h3>
-                        <div className="score">{assesmentScore.score}</div>
-                      </div>
-                    );
+                    if (assesmentScore.id % 2) {
+                      return (
+                        <AnimatedIconRight
+                          key={assesmentScore.id}
+                          pose={this.state.showIcons ? 'visible' : 'hidden'}
+                        >
+                          <div
+                            className="assesment-score"
+                            key={assesmentScore.id}
+                          >
+                            <img
+                              src={assesmentScore.icon}
+                              alt={assesmentScore.name}
+                            />
+                            <h3>{assesmentScore.name}</h3>
+                            <div className="score">{assesmentScore.score}</div>
+                          </div>
+                        </AnimatedIconRight>
+                      );
+                    } else {
+                      return (
+                        <AnimatedIconLeft
+                          key={assesmentScore.id}
+                          pose={this.state.showIcons ? 'visible' : 'hidden'}
+                        >
+                          <div
+                            className="assesment-score"
+                            key={assesmentScore.id}
+                          >
+                            <img
+                              src={assesmentScore.icon}
+                              alt={assesmentScore.name}
+                            />
+                            <h3>{assesmentScore.name}</h3>
+                            <div className="score">{assesmentScore.score}</div>
+                          </div>
+                        </AnimatedIconLeft>
+                      );
+                    }
                   })}
                 </div>
-                {/* <AnimatedButton
+                <AnimatedButton
                   pose={this.state.beginClicked ? 'hidden' : 'visible'}
-                  onClick={this.props.continueAssesment}
+                  onClick={this.resetAssesment}
                   className="begin-button"
                 >
-                  Let's Go!
-                </AnimatedButton> */}
+                  Re-Take!
+                </AnimatedButton>
               </div>
             </div>
           </AnimatedBox>

@@ -21,43 +21,6 @@
 		}
 	}
 
-	input[type='text'] {
-		padding: 1rem 0.5rem;
-		color: $color-grey;
-		border-radius: 5px;
-		border: 2px solid lighten($color-grey, 15%);
-		width: 65%;
-		margin: 0rem auto 2rem auto;
-		text-align: center;
-		font-size: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 2px;
-		font-weight: 800;
-		@include transition(0.2s all ease-in-out);
-		@include mq-md {
-			margin: 1rem;
-			width: 70%;
-			max-width: 250px;
-		}
-		@include mq-sm {
-			margin: 0.5rem;
-			width: 100%;
-			max-width: 150px;
-			font-size: 0.8rem;
-			padding: 0.5rem;
-		}
-
-		&:focus {
-			outline: none;
-			border: 2px solid $color-primary;
-		}
-
-		&.required-highlight {
-			background: fn-transparent-color($color-primary, 0.2);
-			border: 2px solid $color-primary;
-		}
-	}
-
 	.begin-button {
 		display: block;
 		cursor: pointer;

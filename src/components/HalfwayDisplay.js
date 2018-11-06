@@ -8,26 +8,38 @@ class HalfwayDisplay extends Component {
     this.continueAssesment = this.continueAssesment.bind (this);
     this.state = {
       showing: false,
+      beginClicked: false,
     };
   }
 
   componentWillReceiveProps (newProps) {
-    if (this.props.showHalfwayDisplay !== newProps.showHalfwayDisplay) {
+    if (newProps.reset) {
+      this.setState ({
+        beginClicked: false,
+      });
+    }
+
+    if (newProps.showHalfwayDisplay) {
       setTimeout (() => {
         this.setState ({
           showing: true,
         });
       }, 100);
+    } else {
+      this.setState ({
+        showing: false,
+      });
     }
   }
 
   continueAssesment () {
     this.setState ({
+      beginClicked: true,
       showing: false,
     });
     setTimeout (() => {
       this.props.continueAssesment ();
-    }, 100);
+    }, 400);
   }
 
   render () {
@@ -42,8 +54,9 @@ class HalfwayDisplay extends Component {
                 </h1>
                 <div className="intro-text">
                   <p>
-                    You've finished the first half of the assesment! Way to go!
+                    You've finished the first half of the assesment!
                   </p>
+                  <p>Way to go!</p>
                   <p>
                     When you're ready let's move on to optimism!
                   </p>
