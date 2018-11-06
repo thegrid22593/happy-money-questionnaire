@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import AnimatedBox from '../animations/AnimatedBox';
 import AnimatedButton from '../animations/AnimatedButton';
 
@@ -115,4 +116,13 @@ class StartScreen extends Component {
     );
   }
 }
+
+StartScreen.propTypes = {
+  reset: PropTypes.bool,
+  userName: PropTypes.string,
+  assesmentScores: PropTypes.array,
+  showingStartScreen: PropTypes.bool,
+  startAssesment: PropTypes.func,
+};
+
 export default StartScreen;

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Question from './Question';
 import AnimatedQuestion from '../animations/AnimatedQuestion';
 
@@ -27,5 +28,11 @@ class Questions extends Component {
     );
   }
 }
+
+Questions.propTypes = {
+  currentQuestionId: PropTypes.number,
+  questions: PropTypes.array,
+  questionAnswered: PropTypes.bool,
+};
 
 export default Questions;

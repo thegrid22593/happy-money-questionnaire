@@ -44,7 +44,7 @@ var fixture = {
           id: 3,
           active: false,
           answered: false,
-          text: 'I have a hard time staying committed to projects that may take months to complete',
+          text: 'I have a hard time staying committed to projects that may take months to complete.',
           reverse: true,
         },
         {
@@ -113,7 +113,7 @@ var fixture = {
           id: 3,
           active: false,
           answered: false,
-          text: 'I always feel like things will work out for future me',
+          text: 'I always feel like things will work out for future me.',
           reverse: false,
         },
         {

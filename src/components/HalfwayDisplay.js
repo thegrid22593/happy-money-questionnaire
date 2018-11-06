@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import AnimatedBox from '../animations/AnimatedBox';
 import AnimatedButton from '../animations/AnimatedButton';
 
@@ -77,5 +78,12 @@ class HalfwayDisplay extends Component {
     return false;
   }
 }
+
+HalfwayDisplay.propTypes = {
+  reset: PropTypes.bool,
+  userName: PropTypes.string,
+  showHalfwayDisplay: PropTypes.bool,
+  continueAssesment: PropTypes.func,
+};
 
 export default HalfwayDisplay;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AnimatedButton from '../animations/AnimatedButton';
+import PropTypes from 'prop-types';
 
 class Answer extends Component {
   constructor (props) {
@@ -29,5 +29,10 @@ class Answer extends Component {
     );
   }
 }
+
+Answer.propTypes = {
+  answer: PropTypes.obj,
+  selectAnswer: PropTypes.func,
+};
 
 export default Answer;

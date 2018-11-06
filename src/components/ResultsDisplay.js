@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import AnimatedBox from '../animations/AnimatedBox';
 import AnimatedIconLeft from '../animations/AnimatedIconLeft';
 import AnimatedIconRight from '../animations/AnimatedIconRight';
@@ -124,5 +125,13 @@ class ResultsDisplay extends Component {
     return false;
   }
 }
+
+ResultsDisplay.propTypes = {
+  reset: PropTypes.bool,
+  userName: PropTypes.string,
+  assesmentScores: PropTypes.array,
+  showingResults: PropTypes.bool,
+  resetAssesment: PropTypes.func,
+};
 
 export default ResultsDisplay;

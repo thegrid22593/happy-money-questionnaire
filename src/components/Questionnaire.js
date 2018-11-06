@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Questions from './Questions';
 import Answers from './Answers';
 import QuestionHeader from './QuestionHeader';
@@ -60,5 +61,11 @@ class Questionnaire extends Component {
     );
   }
 }
+
+Questionnaire.propTypes = {
+  showingQuestionScreen: PropTypes.bool,
+  assesment: PropTypes.object,
+  updateAssesmentScore: PropTypes.func,
+};
 
 export default Questionnaire;

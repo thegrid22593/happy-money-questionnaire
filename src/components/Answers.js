@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Answer from './Answer';
 
 class Answers extends Component {
@@ -18,5 +19,10 @@ class Answers extends Component {
     );
   }
 }
+
+Answer.propTypes = {
+  answer: PropTypes.obj,
+  selectAnswer: PropTypes.func,
+};
 
 export default Answers;

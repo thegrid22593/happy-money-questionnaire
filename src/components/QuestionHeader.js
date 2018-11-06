@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class QuestionHeader extends Component {
   render () {
@@ -14,5 +15,9 @@ class QuestionHeader extends Component {
     );
   }
 }
+
+QuestionHeader.propTypes = {
+  assesment: PropTypes.object,
+};
 
 export default QuestionHeader;
